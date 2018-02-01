@@ -1,0 +1,24 @@
+/* Colors */
+html, body {
+  background: white;
+  color: black; }
+
+a {
+  color: orange; }
+  a :hover {
+    color: red; }
+
+.header {
+  width: 100%;
+  border: 1px solid; }
+
+.main {
+  width: 69%;
+  height: 100%;
+  float: left;
+  border: 1px solid; }
+
+.sidebar {
+  width: 29%;
+  float: right;
+  border: 1px solid; }
