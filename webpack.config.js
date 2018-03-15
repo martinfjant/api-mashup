@@ -1,7 +1,9 @@
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const path = require('path'); //Sets path
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path') //Sets path
+const Dotenv = require('dotenv-webpack')
+
 
 module.exports = {
     entry: './src/js/index.js',
@@ -9,6 +11,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
         filename: 'index_bundle.js'
     },
+    devtool: 'eval-source-map',
     module: {
         rules: [
             {
@@ -24,7 +27,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env'],
                     }
                 }
             }]
@@ -36,5 +39,6 @@ module.exports = {
         title: 'API Mashup',
         filename: 'index.html',
         hash: true
-    }), new ExtractTextPlugin('style.css')],
-};
+    }), new ExtractTextPlugin('style.css'),
+    new Dotenv()],
+}
