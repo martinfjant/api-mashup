@@ -40,5 +40,5 @@ module.exports = {
         filename: 'index.html',
         hash: true
     }), new ExtractTextPlugin('style.css'),
-    new Dotenv()],
+      new Dotenv()],
 }

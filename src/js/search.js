@@ -1,3 +1,4 @@
+import {urlEncodeData, getPromiseData} from './functions'
 export class Search {
     constructor(string) {
         this.query = string
@@ -6,7 +7,7 @@ export class Search {
 
     fetchFlickr(query, fetchNew = true) {
         const flickrUrl = "https://api.flickr.com/services/rest/?"
-        const flickrAPIkey = process.env.FLICKR_API_KEY
+        const flickrAPIkey = 'c5cb5dcad28714877784a3fc8ba63043'
         fetchNew ? this.page = 0 : this.page++
         let params = {
             method: "flickr.photos.search",
@@ -22,7 +23,6 @@ export class Search {
             parse_tags: 1,
             nojsoncallback: 1
         }
-
         let flickrQueryParams = urlEncodeData(params)
         let queryUrl = `${flickrUrl}${flickrQueryParams}`
 
@@ -30,13 +30,27 @@ export class Search {
     }
 
     do() {
-        let query = Page.query
+        let query = this.query
         let promises = [
             this.fetchFlickr(this.query),
             //this.fetchword(query)
         ]
+        return promises }
 
-        Promise.all(promises)
-        resolve(' nåt') //skall köra uppdatera
-    }
+
+
+        
+    
 }
+
+/*
+Promise.all(promises)
+        .then(value => value[photo][photos]
+        .map(x => {
+            let obj = {}
+            images[x.key] = new Image (x[url_m], x[title])
+            return images
+        } ) )
+        .catch(reason => { 
+            console.log(reason)
+          })*/
