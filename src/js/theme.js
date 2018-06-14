@@ -1,7 +1,6 @@
 export class Theme {
-    constructor() {
-        this.page =
-            `<header class="header level">
+  constructor() {
+    this.page = `<header class="header level">
             <div class="">
                 <h1 class="title is-1">API Mashup!</h1>
                 <h2 class="subtitle is-3">stuff will go here</h2>
@@ -37,10 +36,10 @@ export class Theme {
             With the help of Big Huge Thesaurus and Flickr
             </p>
             </footer>`
-    }
-    render() {
-        document.open()
-        document.write(this.page)
-        document.close()
-    }
+  }
+  render() {
+    document.open()
+    document.write(this.page)
+    document.close()
+  }
 }
