@@ -28,7 +28,7 @@ import '../css/app.scss' //Get's mah sass
 // Creates a static page
 const theme = new Theme
 theme.render()
-const app = new App // Instance page
+export const app = new App // Instance page
 import {Picture} from './models'
 
 function do_search() {

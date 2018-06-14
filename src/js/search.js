@@ -1,20 +1,10 @@
+import {App, Picture, Word} from './models'
+import {app} from './index'
 import {
     urlEncodeData,
     getPromiseData
 } from './functions'
-// Model for pictures to be displayed
-class Picture {
-    constructor(url, alt) {
-        this.url = url
-        this.alt = alt
-        this.html = `
-        <img src="${this.url}" 
-             alt="${this.alt}">`
-    }
-render (){
-    app.main.appendChild(this.html)
-}
-}
+
 export class Search {
     constructor(string) {
         this.query = string
@@ -44,43 +34,41 @@ export class Search {
 
         return fetch(queryUrl)
     }
-
+    fetchWordlabWords(query) {
+        let wordLabAPIkey = '214ed8bf50ece2cb01eb884dc0810706'
+        let wordLabUrl = `http://words.bighugelabs.com/api/2/${wordLabAPIkey}/${query}/json`;
+    
+        return fetch(wordLabUrl);
+      }
     do() {
         let query = this.query
         const flickrPromise = this.fetchFlickr(this.query)
+        const wordPromise = this.fetchWordlabWords(this.query)
         
         let promises = [
-            flickrPromise
+            flickrPromise,
+            wordPromise
         ]
         let data =
         getPromiseData(promises)
-            .then(res => res[0])
-            .then(value => value["photos"]["photo"])
-           // .then(index => index.map(index => console.log(index)))
-           .then(array => array
-               // .map((index) => {console.log(index["url_m"], index["title"])}))
-               .map((index) => {const picture = new Picture(index["url_m"], index["title"]); picture.render()}))
-          //  .then (res => console.log(res))
+            //.then ( res => console.log(res[1]))
+            // .then(res => res[0])
+            // .then(value => value)
+           .then((array) => {
+               picFlatten(array[0]["photos"]["photo"])
+               wordFlatten(array[1]["noun"]["syn"])
+                })
+
             .catch(err => console.log(err))
 
            // returnObject = { flickr: data[0][photos][photo]}
            // return returnObject
     }
-
-
-
-
-
 }
 
-/*
-Promise.all(promises)
-        .then(value => value[photo][photos]
-        .map(x => {
-            let obj = {}
-            images[x.key] = new Image (x[url_m], x[title])
-            return images
-        } ) )
-        .catch(reason => { 
-            console.log(reason)
-          })*/
+export function picFlatten (input) {
+input.map((index) => {const picture = new Picture(index["url_m"], index["title"]); picture.render()})
+}
+export function wordFlatten (input) {
+input.map ((index) => {const words = new Word(index); words.render()})
+}

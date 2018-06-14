@@ -23,16 +23,12 @@ export class Theme {
             <div class=columns>
             <main class="column content">
             <div class="container">
-            <p>result</p>
             </div>
             </main>
             <aside class="column is-one-quarter menu">
                 <p class="menu-label">Related words!</p>
-                <ul class="menu-list">
-                    <li><a href="#">2</a></li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
+                <ul class="menu-list wordList">
+
                 </ul>
             </aside>
             </div>
